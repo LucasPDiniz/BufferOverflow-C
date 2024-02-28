@@ -25,8 +25,7 @@ Explaining each window.
 <p align="center">
   <img width="900" height="300" src="./img/9.png">
 </p>
-4 - These are the registers (
-32bit). Registers are used to store temporary data and memory addresses during program execution.<br>
+4 - These are the registers (32bit). Registers are used to store temporary data and memory addresses during program execution.<br>
 5 - This is the Flags field. These are special bits in a register that represent the result of an arithmetic or logical operation. They are used to indicate conditions such as equality, greater than, less than, among others, and are often used in conditional branch instructions to control program flow.<br><br>
 
 <p align="center">
@@ -105,7 +104,7 @@ Right after the **EntryPoint**, we have some basic executions of the program, it
   <img width="900" height="150" src="./img/6.png">
 </p>
 
-Navigating through the function using **F8**, we find a new function **[buffer.401348]**. This is our main function of the C program. We enter it **(F7)**
+Navigating through the function using **F8**, we find a new function **[buffer.401348]**. This is our main function of the C program. We enter it **(F7)**.
 <p align="center">
   <img width="900" height="150" src="./img/7.png">
 </p>
@@ -115,6 +114,23 @@ This is the beginning of our MAIN function.
   <img width="900" height="190" src="./img/8.png">
 </p>
 
-4 - 
+4 - We have arrived at our function! But what does this part do?
 
-### Working ....
+<p align="center">
+  <img width="600" height="300" src="./img/12.png">
+</p>
+
+- Quick Explanation<br>
+
+```
+push ebp           # Responsible for the base of the stack. Sends the EBP value to stack.
+mov ebp,esp        # Moves the value of the ESP register to EBP.
+and esp,FFFFFFF0   # Sets the 4 least significant bits to 0.
+sub esp,20         # Subtract 20 from ESP. At this point, space is created in the stack
+call buffer.401930 # Function call
+lea eax,dword ptr ss:[esp+14]   # Retrieves the stack address pointed to by ESP with +14 offset and sends it to EAX.
+mov dword ptr ss:[esp],eax      # Sends the value of EAX to the value of the STACK address pointed to by ESP
+call <JMP.&gets>   # Function that waits for input at the prompt.
+...
+After that, it retrieves the value to be shown in the prompt again.
+```
