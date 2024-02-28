@@ -134,3 +134,53 @@ call <JMP.&gets>   # Function that waits for input at the prompt.
 ...
 After that, it retrieves the value to be shown in the prompt again.
 ```
+
+5 - Let's send some Data and observe the Stack (explanation above)
+
+* This is the stack before the GETS function. There is an address [0060FF0C] responsible for returning this function.
+
+<p align="center">
+  <img width="900" height="250" src="./img/13.png">
+</p>
+
+* Let's send 10 'A' (``AAAAAAAAAA``) in prompt. 
+
+Cool, we observe the filling of the field reserved to receive the entered string.
+
+<p align="center">
+  <img width="900" height="250" src="./img/14.png">
+</p>
+
+6 - Sending more Data
+
+* This function has a return address, called at the end of our function to return to executing our program (outside the main function). As we can see above, the return address is below the field reserved for data. Can we send more data and fill in the return value for this function?
+
+  Counting the bytes of 41 (A) we will arrive at the return address sending 28 A's. We will try?
+  ``AAAAAAAAAAAAAAAAAAAAAAAAAAAA`` (28 A)
+
+<p align="center">
+  <img width="900" height="250" src="./img/15.png">
+</p>
+
+<p align="center">
+Oops, it looks like we wrote the return address with A. Let's see the return.
+</p>
+  
+
+* At the end of the function, RET is called, which uses the ESP address where we overwrite it with A. When trying to look for the memory value **41414141**, it does not exist and causes **ACCESS_VIOLATION**.
+
+  <p align="center">
+  <img width="900" height="300" src="./img/16.png">
+</p>
+
+<p align="center">
+Voilà! we have a BufferOverFlow overwriting the return address of our function.
+</p>
+
+
+<p align="center">
+  <img width="400" height="260" src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExdGlkOHdqYWQwMndwM2hudmRyODZ2aGdwMTVxd2JoZjdqcXMzbmJ3ZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/nbvFVPiEiJH6JOGIok/giphy.gif">
+</p>
+
+
+7 - Where is our secret function?
