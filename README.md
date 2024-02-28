@@ -13,6 +13,34 @@ Softwares;
 
 * [Debugger x64dbg](https://x64dbg.com)
 
+## Basics about x64dbg
+
+In this step, let's quickly talk about windows and some information about x64dbg.
+
+Explaining each window.
+
+1 - The memory address is given in hexadecimal.<br>
+2 - The value that is in the memory address of window 1 is informed.<br>
+3 - In the form of mnemonics, instructions for each address are provided.
+<p align="center">
+  <img width="900" height="300" src="./img/9.png">
+</p>
+4 - These are the registers (
+32bit). Registers are used to store temporary data and memory addresses during program execution.<br>
+5 - This is the Flags field. These are special bits in a register that represent the result of an arithmetic or logical operation. They are used to indicate conditions such as equality, greater than, less than, among others, and are often used in conditional branch instructions to control program flow.<br><br>
+
+<p align="center">
+  <img width="500" height="300" src="./img/10.png">
+</p>
+
+6 - The name of this window is **Stack**. A special memory region used to store temporary data, return addresses, and function call contexts. The **Stack** is a LIFO (Last In, First Out) data structure.
+<p align="center">
+  <img width="700" height="250" src="./img/11.png">
+</p>
+
+These are the 6 basic windows that we will use to visualize the program's BufferOverFlow process.
+
+I think we're ready to go! :)
 
 ## Buffer? OverFlow?
 
@@ -84,7 +112,7 @@ Navigating through the function using **F8**, we find a new function **[buffer.4
 
 This is the beginning of our MAIN function.
 <p align="center">
-  <img width="900" height="150" src="./img/8.png">
+  <img width="900" height="190" src="./img/8.png">
 </p>
 
 4 - 
