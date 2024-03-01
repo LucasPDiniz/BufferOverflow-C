@@ -82,7 +82,7 @@ We are creating 2 functions, the main one which only shows the text we type. And
 > Account, even when skimming.
 To make this laboratory simpler, we are using the GCC compiler and 32-bit Codeblocks, however, the exploration logic for 64-bits is the same.
 
-## Let's explore!:mag:
+## Let's explore! :mag:
 
 Assembly language is complex and has a lot of theory to be explained, so I'm going directly to the exploration points explaining it in a basic way.
 
