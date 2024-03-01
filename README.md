@@ -174,7 +174,7 @@ Oops, it looks like we wrote the return address with A. Let's see the return.
 </p>
 
 <p align="center">
-Voilà! we have a BufferOverFlow overwriting the return address of our function.
+Voilà! <br><br>We have a <font color="red"> BufferOverFlow</font> overwriting the return address of our function.
 </p>
 
 
