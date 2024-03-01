@@ -79,7 +79,7 @@ We are creating 2 functions, the main one which only shows the text we type. And
 </p>
 
 > [!NOTE]  
-> account, even when skimming.
+> Account, even when skimming.
 To make this laboratory simpler, we are using the GCC compiler and 32-bit Codeblocks, however, the exploration logic for 64-bits is the same.
 
 ## Let's explore!:mag:
@@ -169,14 +169,14 @@ Oops, it looks like we wrote the return address with A. Let's see the return.
 </p>
   
 
-* At the end of the function, RET is called, which uses the ESP address where we overwrite it with A. When trying to look for the memory value **41414141**, it does not exist and causes **ACCESS_VIOLATION**.
+* At the end of the function, RET is called, which uses the ESP address where we overwrite it with A. When trying to look for the memory value **41414141**, it does not exist and causes  <font color="red">**ACCESS_VIOLATION**.</font>
 
 <p align="center">
   <img width="900" height="300" src="./img/16.png">
 </p>
 
 <p align="center">
-Voilà! <br><br>:warning:We have a <font color="red"> BufferOverFlow</font> overwriting the return address of our function:warning:
+Voilà! <br><br>:warning: We have a <font color="red"> BufferOverFlow</font> overwriting the return address of our function :warning:
 </p>
 
 
@@ -231,10 +231,11 @@ After our main function finishes, we jump to the beginning of the memory address
 </p>
   
 <p align="center">
-we can see the output with the string 'Secret function', as we wrote in the printf of this function
+We can see the output with the string 'Secret function', as we wrote in the printf of this function
 </p>
 
-8 - Ending
+Ending
+---
 
 * Follow some recommendations to avoid BufferOverFlow;
 
