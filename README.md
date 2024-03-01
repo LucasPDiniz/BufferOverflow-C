@@ -135,7 +135,7 @@ call <JMP.&gets>   # Function that waits for input at the prompt.
 After that, it retrieves the value to be shown in the prompt again.
 ```
 
-5 - Let's send some Data and observe the Stack (explanation above)
+5 - Let's send some Data and observe the Stack.
 
 * This is the stack before the GETS function. There is an address [0060FF0C] responsible for returning this function.
 
