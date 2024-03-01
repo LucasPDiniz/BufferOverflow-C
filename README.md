@@ -41,7 +41,7 @@ These are the 6 basic windows that we will use to visualize the program's Buffer
 
 I think we're ready to go! :)
 
-## Buffer:question: OverFlow:question:
+## Buffer :question: OverFlow :question:
 
 The BufferOverflow is a security vulnerability that occurs when a program attempts to store more data in a buffer than it was designed to hold. This could allow an attacker to execute malicious code or corrupt important data on the affected system.
 
@@ -53,7 +53,7 @@ Below we can see an example of how this works. In this case, a variable with a s
 
 In some cases, we can perform RCE by exploiting a BufferOverFlow, changing and overwriting the next EIP memory address (Let's talk about this)
 
-## How are we going to do it:question:
+## How are we going to do it :question:
 
 First, let's create a basic code in C in codeblocks as shown in the example below.
 
