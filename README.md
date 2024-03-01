@@ -4,7 +4,7 @@
   <img width="700" height="300" src="./img/1.png">
 </p>
 
-## Introduction
+## Introduction :pencil2:
 
 In a simple way, I will show how a BufferOverFlow is created in a program written in the C language. For this laboratory, we will use codeblocks to create a simple code in C with a secret function. To view the buffer in memory, we will also use an assembly debugger, called x64dbg.
 
@@ -13,7 +13,7 @@ Softwares;
 
 * [Debugger x64dbg](https://x64dbg.com)
 
-## Basics about x64dbg
+## Basics about x64dbg :pinching_hand:
 
 In this step, let's quickly talk about windows and some information about x64dbg.
 
@@ -41,7 +41,7 @@ These are the 6 basic windows that we will use to visualize the program's Buffer
 
 I think we're ready to go! :)
 
-## Buffer? OverFlow?
+## Buffer:question: OverFlow:question:
 
 The BufferOverflow is a security vulnerability that occurs when a program attempts to store more data in a buffer than it was designed to hold. This could allow an attacker to execute malicious code or corrupt important data on the affected system.
 
@@ -53,7 +53,7 @@ Below we can see an example of how this works. In this case, a variable with a s
 
 In some cases, we can perform RCE by exploiting a BufferOverFlow, changing and overwriting the next EIP memory address (Let's talk about this)
 
-## How are we going to do it?
+## How are we going to do it:question:
 
 First, let's create a basic code in C in codeblocks as shown in the example below.
 
@@ -78,9 +78,11 @@ We are creating 2 functions, the main one which only shows the text we type. And
   <img width="600" height="100" src="./img/3.png">
 </p>
 
+> [!NOTE]  
+> account, even when skimming.
 To make this laboratory simpler, we are using the GCC compiler and 32-bit Codeblocks, however, the exploration logic for 64-bits is the same.
 
-## Let's explore!
+## Let's explore!:mag:
 
 Assembly language is complex and has a lot of theory to be explained, so I'm going directly to the exploration points explaining it in a basic way.
 
@@ -169,12 +171,12 @@ Oops, it looks like we wrote the return address with A. Let's see the return.
 
 * At the end of the function, RET is called, which uses the ESP address where we overwrite it with A. When trying to look for the memory value **41414141**, it does not exist and causes **ACCESS_VIOLATION**.
 
-  <p align="center">
+<p align="center">
   <img width="900" height="300" src="./img/16.png">
 </p>
 
 <p align="center">
-Voilà! <br><br>We have a <font color="red"> BufferOverFlow</font> overwriting the return address of our function.
+Voilà! <br><br>:warning:We have a <font color="red"> BufferOverFlow</font> overwriting the return address of our function:warning:
 </p>
 
 
@@ -184,3 +186,85 @@ Voilà! <br><br>We have a <font color="red"> BufferOverFlow</font> overwriting t
 
 
 7 - Where is our secret function?
+
+* above our main function, we can observe the secret function, by the string generated at the memory buffer address [403024], it is easy to identify. 
+
+<p align="center">
+  <img width="900" height="300" src="./img/17.png">
+</p>
+
+* The secret function starts at memory address **[401334]**, right? What if we overwrite the return address of our main function to the address **[401334]**? we will try.
+
+  First, we need to know what the value 401334 is in string. we can use any website to convert HEX to STRING. I used the 
+  [Duplichecker - Hex to Text](https://www.duplichecker.com/hex-to-text.php.).
+
+  <p align="center">
+  <img width="500" height="100" src="./img/18.png">
+</p>
+
+  As we sent 28 'A' to fill in the return address, now we will send 24 'A' + 4 from the memory address of the main function [401334] (In HEX -> @4), example;
+
+  ``AAAAAAAAAAAAAAAAAAAAAAAA4@``
+
+> [!IMPORTANT]  
+> The x86 processors use little-endian byte ordering. The least significant byte (LSB) of an integer is stored at the lowest address of the integer. With this, we will invert 4@ to @4.
+ 
+
+  <p align="center">
+  <img width="500" height="300" src="./img/19.png">
+</p>
+  
+<p align="center">
+We did it! we have the address of the secret function in the return of MAIN.
+</p>
+
+* Let's let the program continue running.
+
+<p align="center">
+  <img width="900" height="100" src="./img/20.png">
+</p>
+
+After our main function finishes, we jump to the beginning of the memory address of our secret function.
+
+<p align="center">
+  <img width="500" height="100" src="./img/21.png">
+</p>
+  
+<p align="center">
+we can see the output with the string 'Secret function', as we wrote in the printf of this function
+</p>
+
+8 - Ending
+
+* Follow some recommendations to avoid BufferOverFlow;
+
+    1 - **Use secure functions:** 
+    
+    Use functions like fgets() to read input strings instead of gets(), which does not check the buffer size.
+
+    2 - **Use strncpy() or strlcpy():** 
+    
+    When copying strings, use strncpy() or strlcpy() instead of strcpy(), as these functions limit the number of characters copied, avoiding buffer overflow.
+
+    3 - **Use snprintf():** 
+    
+    When formatting strings, use snprintf() instead of sprintf(), as snprintf() accepts an additional argument to specify the maximum buffer size.
+
+    4 - **Check boundaries:** 
+    
+    Always check buffer boundaries when reading or writing data to arrays.
+
+    5 - **Use buffers large enough:** 
+    
+    Ensure that buffers are large enough for the maximum amount of data they can store.
+
+    6 - **Use secure libraries:** 
+    
+    Consider using libraries that provide secure string manipulation functions, such as OpenBSD's strlcpy().
+
+    <p align="center">
+  <img width="400" height="260" src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExYjQ0M3M4d2dpNDMzNHV2eTh1NGRsbmd4NTV5MXdmOGFuMW5lMGhjYyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/lTpme2Po0hkqI/giphy.gif">
+</p>
+<p align="center">
+Thank you all!
+</p>
